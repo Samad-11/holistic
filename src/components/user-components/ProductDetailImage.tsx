@@ -16,14 +16,14 @@ const ProductDetailImage = ({ product, selectedVariant }: { product: Product2, s
     }
     return (
         <div
-            className='border border-black px-2 space-y-5'
+            className=' px-2 space-y-5'
         >
-            <figure className='aspect-square relative'>
+            <figure className='aspect-square relative rounded-md'>
                 <Image
                     src={product.variant[selectedVariant].images[selectedImage]}
-                    alt="Product Image"
+                    alt="Product Image "
                     fill
-                    className='object-contain' />
+                    className='object-contain shadow-md shadow-black rounded-md' />
             </figure>
             <div className='carousel  rounded-box w-full space-x-2'>
                 {

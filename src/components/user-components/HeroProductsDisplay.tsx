@@ -33,7 +33,7 @@ const HeroProductsDisplay = ({ products, title, showMore = true }: { products: I
             >
                 {title}
             </h2>
-            <div className="carousel rounded-box sm:space-x-2 md:space-x-4  w-full mt-10">
+            <div className="carousel rounded-box sm:space-x-2 md:space-x-4 space-x-2  w-full mt-10">
                 {
                     products.map((product, indx) => (
                         <div key={`bestsellers-product-${indx}`} className="carousel-item max-sm:w-full max-md:w-1/2  ">

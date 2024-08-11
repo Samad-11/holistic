@@ -13,7 +13,7 @@ const ProductDetail = ({ product }: { product: Product2 }) => {
     }, [selectedVariant])
 
     return (
-        <div className='grid grid-cols-2 h-screen mt-10'>
+        <div className='grid grid-cols-1  sm:grid-cols-2 min-h-screen mt-10'>
             <ProductDetailText product={product} selectedVariant={selectedVariant} setSelectedVariant={setSelectedVariant} />
             <ProductDetailImage product={product} selectedVariant={selectedVariant} />
         </div>

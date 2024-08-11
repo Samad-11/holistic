@@ -14,7 +14,7 @@ const ProductDetailText = ({ product, selectedVariant, setSelectedVariant }: {
 
 
     return (
-        <div className='col-span-1  w-full flex flex-col  justify-around'>
+        <div className='col-span-1  max-sm:order-last w-full flex flex-col  justify-around max-sm:gap-5'>
             <div>
                 <BackButton />
             </div>
