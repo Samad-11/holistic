@@ -51,6 +51,7 @@ model Variant {
 
 model Category {
   id       String    @id @default(auto()) @map("_id") @db.ObjectId
-  name     String    @unique
+  name     String
+  slug     String    @unique
   products Product[]
 }

@@ -1,7 +1,7 @@
 
 import { siteName } from '@/constants'
 import Link from 'next/link'
-import React from 'react'
+import React, { Suspense } from 'react'
 import NavbarCart from './NavbarCart'
 import NavbarInput from './NavbarInput'
 import Container from '../Container'
@@ -11,6 +11,7 @@ import NavbarSideBar from './NavbarSideBar'
 import { usePathname, useSearchParams } from 'next/navigation'
 import { Category } from '@prisma/client'
 import { categories } from '@/lib/dummy'
+import slugify from 'slugify'
 
 const Navbar = ({ categories }: { categories: Category[] }) => {
 
@@ -37,7 +38,9 @@ const NavTop = () => {
                 <Link href={'/'} className="text-2xl text-primary font-bold ">{siteName}</Link>
             </div>
             <div className="flex-none gap-2">
-                <NavbarInput />
+                <Suspense>
+                    <NavbarInput />
+                </Suspense>
                 <NavbarCart />
                 <div className="dropdown dropdown-end">
                     <div tabIndex={0} role="button" className="btn btn-ghost btn-circle avatar">
@@ -73,8 +76,8 @@ const NavBottom = ({ categories }: { categories: Category[] }) => {
         ">
             <div className="flex-1 flex justify-start flex-wrap gap-3">
                 {
-                    [{ id: "0", name: "All" }, ...categories].map((category, indx) => (
-                        <Link key={category.name + indx} href={`/shop/${category.name.toLowerCase()}`} className="text-sm text-gray-600 hover:text-gray-900">{category.name}</Link>
+                    [{ id: "0", name: "All", slug: "all" }, ...categories].map((category, indx) => (
+                        <Link key={category.name + indx} href={`/shop/${category.slug}`} className="text-sm text-gray-600 hover:text-gray-900">{category.name}</Link>
 
                     ))
                 }

@@ -24,6 +24,20 @@ export async function fetchProductsHome() {
     }
 }
 
+export async function fetchProductsSlug() {
+    try {
+        const products = await prisma.product.findMany({
+            select: {
+                slug: true
+            }
+        })
+
+        return products
+    } catch (error) {
+
+    }
+}
+
 export async function fetchProductsShop(offset: number,
     maxProducts: number,
     query?: string,
@@ -56,7 +70,7 @@ export async function fetchProductsShop(offset: number,
                     { description: { contains: query, mode: "insensitive" } },
                 ] : undefined,
                 category: {
-                    name: {
+                    slug: {
                         equals: categoryServer, mode: "insensitive"
                     }
                 },
