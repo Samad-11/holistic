@@ -1,0 +1,122 @@
+[
+    {
+        "productId": "66b7db7dacab60ff161e4e62",
+        "name": "small",
+        "price": 40,
+        "inStock": true,
+        "images": [
+            "https://via.placeholder.com/150/92c952",
+            "https://via.placeholder.com/150/771796"
+        ]
+    },
+    {
+        "productId": "66b7db7dacab60ff161e4e62",
+        "name": "medium",
+        "price": 60,
+        "inStock": false,
+        "images": [
+            "https://via.placeholder.com/150/92c952"
+        ]
+    },
+    {
+        "productId": "66b7db7dacab60ff161e4e63",
+        "name": "100ml",
+        "price": 80,
+        "inStock": true,
+        "images": [
+            "https://via.placeholder.com/150/24f355",
+            "https://via.placeholder.com/150/d32776"
+        ]
+    },
+    {
+        "productId": "66b7db7dacab60ff161e4e63",
+        "name": "200ml",
+        "price": 150,
+        "inStock": true,
+        "images": [
+            "https://via.placeholder.com/150/24f355"
+        ]
+    },
+    {
+        "productId": "66b7db7dacab60ff161e4e64",
+        "name": "10 Tablets",
+        "price": 20,
+        "inStock": true,
+        "images": [
+            "https://via.placeholder.com/150/f66b97",
+            "https://via.placeholder.com/150/56a8c2"
+        ]
+    },
+    {
+        "productId": "66b7db7dacab60ff161e4e64",
+        "name": "20 Tablets",
+        "price": 35,
+        "inStock": true,
+        "images": [
+            "https://via.placeholder.com/150/f66b97"
+        ]
+    },
+    {
+        "productId": "66b7db7dacab60ff161e4e65",
+        "name": "30 Tablets",
+        "price": 100,
+        "inStock": true,
+        "images": [
+            "https://via.placeholder.com/150/b0f7cc"
+        ]
+    },
+    {
+        "productId": "66b7db7dacab60ff161e4e66",
+        "name": "250ml",
+        "price": 120,
+        "inStock": true,
+        "images": [
+            "https://via.placeholder.com/150/54176f"
+        ]
+    },
+    {
+        "productId": "66b7db7dacab60ff161e4e67",
+        "name": "20 Tablets",
+        "price": 50,
+        "inStock": true,
+        "images": [
+            "https://via.placeholder.com/150/51aa97"
+        ]
+    },
+    {
+        "productId": "66b7db7dacab60ff161e4e68",
+        "name": "150ml",
+        "price": 75,
+        "inStock": true,
+        "images": [
+            "https://via.placeholder.com/150/810b14"
+        ]
+    },
+    {
+        "productId": "66b7db7dacab60ff161e4e69",
+        "name": "50g",
+        "price": 45,
+        "inStock": true,
+        "images": [
+            "https://via.placeholder.com/150/8f209a"
+        ]
+    },
+    {
+        "productId": "66b7db7dacab60ff161e4e6a",
+        "name": "150ml",
+        "price": 110,
+        "inStock": true,
+        "images": [
+            "https://via.placeholder.com/150/5a9"
+        ]
+    },
+    {
+        "productId": "66b7db7dacab60ff161e4e6b",
+        "name": "30 Tablets",
+        "price": 90,
+        "inStock": true,
+        "images": [
+            "https://via.placeholder.com/150/5a9"
+        ]
+    }
+]

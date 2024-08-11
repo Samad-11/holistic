@@ -1,0 +1,221 @@
+{
+    "products": [
+        {
+            "id": "1",
+            "name": "Jhandu Balm",
+            "description": "A soothing balm for pain relief.",
+            "brand": "Jhandu",
+            "category": "pain relief",
+            "type": "balm",
+            "salesCount": 120,
+            "variant": [
+                {
+                    "name": "small",
+                    "price": 40,
+                    "inStock": true,
+                    "images": [
+                        "https://via.placeholder.com/150/92c952",
+                        "https://via.placeholder.com/150/771796"
+                    ]
+                },
+                {
+                    "name": "medium",
+                    "price": 60,
+                    "inStock": false,
+                    "images": [
+                        "https://via.placeholder.com/150/771796"
+                    ]
+                }
+            ]
+        },
+        {
+            "id": "2",
+            "name": "Cough Syrup",
+            "description": "Effective syrup for quick relief from cough.",
+            "brand": "CureMax",
+            "category": "cough",
+            "type": "syrup",
+            "salesCount": 150,
+            "variant": [
+                {
+                    "name": "100ml",
+                    "price": 80,
+                    "inStock": true,
+                    "images": [
+                        "https://via.placeholder.com/150/24f355",
+                        "https://via.placeholder.com/150/d32776"
+                    ]
+                },
+                {
+                    "name": "200ml",
+                    "price": 150,
+                    "inStock": true,
+                    "images": [
+                        "https://via.placeholder.com/150/24f355"
+                    ]
+                }
+            ]
+        },
+        {
+            "id": "3",
+            "name": "Paracetamol Tablets",
+            "description": "Tablets for reducing fever and relieving pain.",
+            "brand": "Paracare",
+            "category": "fever",
+            "type": "tablets",
+            "salesCount": 200,
+            "variant": [
+                {
+                    "name": "10 Tablets",
+                    "price": 20,
+                    "inStock": true,
+                    "images": [
+                        "https://via.placeholder.com/150/f66b97",
+                        "https://via.placeholder.com/150/56a8c2"
+                    ]
+                },
+                {
+                    "name": "20 Tablets",
+                    "price": 35,
+                    "inStock": true,
+                    "images": [
+                        "https://via.placeholder.com/150/f66b97"
+                    ]
+                }
+            ]
+        },
+        {
+            "id": "4",
+            "name": "Vitamin C Tablets",
+            "description": "Boost your immunity with these Vitamin C tablets.",
+            "brand": "ImmunoBoost",
+            "category": "vitamins",
+            "type": "tablets",
+            "salesCount": 80,
+            "variant": [
+                {
+                    "name": "30 Tablets",
+                    "price": 100,
+                    "inStock": true,
+                    "images": [
+                        "https://via.placeholder.com/150/b0f7cc"
+                    ]
+                }
+            ]
+        },
+        {
+            "id": "5",
+            "name": "Multivitamin Syrup",
+            "description": "Daily multivitamin syrup for overall health.",
+            "brand": "HealthPlus",
+            "category": "vitamins",
+            "type": "syrup",
+            "salesCount": 90,
+            "variant": [
+                {
+                    "name": "250ml",
+                    "price": 120,
+                    "inStock": true,
+                    "images": [
+                        "https://via.placeholder.com/150/54176f"
+                    ]
+                }
+            ]
+        },
+        {
+            "id": "6",
+            "name": "Aspirin Tablets",
+            "description": "Pain relief and anti-inflammatory tablets.",
+            "brand": "PainAway",
+            "category": "pain relief",
+            "type": "tablets",
+            "salesCount": 130,
+            "variant": [
+                {
+                    "name": "20 Tablets",
+                    "price": 50,
+                    "inStock": true,
+                    "images": [
+                        "https://via.placeholder.com/150/51aa97"
+                    ]
+                }
+            ]
+        },
+        {
+            "id": "7",
+            "name": "Antacid Syrup",
+            "description": "Quick relief from acidity and heartburn.",
+            "brand": "AcidGone",
+            "category": "digestion",
+            "type": "syrup",
+            "salesCount": 70,
+            "variant": [
+                {
+                    "name": "150ml",
+                    "price": 75,
+                    "inStock": true,
+                    "images": [
+                        "https://via.placeholder.com/150/810b14"
+                    ]
+                }
+            ]
+        },
+        {
+            "id": "8",
+            "name": "Antiseptic Cream",
+            "description": "For cuts, wounds, and skin infections.",
+            "brand": "HealFast",
+            "category": "first aid",
+            "type": "cream",
+            "salesCount": 60,
+            "variant": [
+                {
+                    "name": "50g",
+                    "price": 45,
+                    "inStock": true,
+                    "images": [
+                        "https://via.placeholder.com/150/8f209a"
+                    ]
+                }
+            ]
+        },
+        {
+            "id": "9",
+            "name": "Pain Relief Spray",
+            "description": "Instant pain relief spray for muscles and joints.",
+            "brand": "QuickRelief",
+            "category": "pain relief",
+            "type": "spray",
+            "salesCount": 140,
+            "variant": [
+                {
+                    "name": "150ml",
+                    "price": 110,
+                    "inStock": true,
+                    "images": [
+                        "https://via.placeholder.com/150/5a9"
+                    ]
+                }
+            ]
+        },
+        {
+            "id": "10",
+            "name": "Digestive Enzyme Tablets",
+            "description": "Enhances digestion and nutrient absorption.",
+            "brand": "DigestWell",
+            "category": "digestion",
+            "type": "tablets",
+            "salesCount": 85,
+            "variant": [
+                {
+                    "name": "30 Tablets",
+                    "price": 90,
+                    "inStock": true,
+                    "images": [
+                        "https://via.placeholder.com/150/5a9"
+                    ]
+                }
+            ]
+        }
+    ]
+}
