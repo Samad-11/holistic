@@ -1,5 +1,5 @@
 'use client'
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import img from '@/../public/dummyImageProduct.webp'
 import Image from 'next/image'
 import { FaBasketShopping } from 'react-icons/fa6'
@@ -31,9 +31,21 @@ import slugify from 'slugify'
 const ProductCard = ({ product }: { product: Product2 }) => {
     const [selectedVariant, setSelectedVariant] = useState(0)
     const router = useRouter()
+
+    //use effect on selectedVariantchange 
+    useEffect(() => {
+        if (selectedVariant >= product.variant.length) {
+            setSelectedVariant(0)
+        }
+    }, [selectedVariant, product.variant])
+
+
     const handleSelectVariant = (variantIndex: number) => {
         setSelectedVariant(variantIndex)
+
     }
+
+
 
     const handleProductDetail = () => {
         const slug = slugify(product.name, { trim: true, replacement: "-", lower: true })
