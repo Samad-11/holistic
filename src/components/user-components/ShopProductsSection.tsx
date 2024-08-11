@@ -1,5 +1,5 @@
 'use client'
-import React, { useEffect, useState } from 'react'
+import React, { Suspense, useEffect, useState } from 'react'
 import ProductCard from '../ProductCard'
 import ShopFilter from './ShopFilter'
 // import { products } from '@/lib/dummy'
@@ -94,7 +94,9 @@ const ShopProductsSection = ({ categoryName }: { categoryName: string }) => {
                     className='text-2xl font-semibold py-5'
                 >Filters</h3>
                 <div>
-                    <ShopFilter />
+                    <Suspense>
+                        <ShopFilter />
+                    </Suspense>
                 </div>
             </div>
             <div className="col-span-7 px-2">

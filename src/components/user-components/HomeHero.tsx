@@ -1,5 +1,5 @@
 import { siteName } from '@/constants'
-import React from 'react'
+import React, { Suspense } from 'react'
 import ProductCard from '../ProductCard'
 import { FaMagnifyingGlass } from 'react-icons/fa6'
 import { IProduct } from '@/lib/types'
@@ -15,7 +15,9 @@ const HomeHero = ({ product }: IProduct) => {
                 <p className='font-thin text-lg '>{siteName}</p>
                 <h1 className=' text-primary text-4xl font-bold mb-8'>The place where you can find all medications</h1>
                 <p >We believe that improving both the occasional and ongoing engagement experience is necessary to making care dramatically better.</p>
-                <HomeHeroSearchInput />
+                <Suspense>
+                    <HomeHeroSearchInput />
+                </Suspense>
             </div>
             <div className="col-span-1 flex justify-center items-center">
                 <ProductCard product={product} />
