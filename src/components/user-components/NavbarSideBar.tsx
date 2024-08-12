@@ -47,7 +47,9 @@ const NavbarSideBar = ({ categories }: { categories: CategoryType[] }) => {
                                         {
                                             categories.map((category, indx) => (
                                                 <li key={`category-${indx}`} className='list-item'>
-                                                    <Link href={category.name}>
+                                                    <Link href={category.name}
+                                                        onClick={closeSideBar}
+                                                    >
                                                         {category.name}
                                                     </Link>
                                                 </li>
@@ -57,9 +59,9 @@ const NavbarSideBar = ({ categories }: { categories: CategoryType[] }) => {
                                     </ul>
                                 </div>
                             </li>
-                            <li><Link href={"/about"}>About</Link></li>
-                            <li><Link href={"/about"}>FAQ&apos;s</Link></li>
-                            <li><Link href={"/about"}>Blogs</Link></li>
+                            <li><Link href={"/about"} onClick={closeSideBar}>About</Link></li>
+                            <li><Link href={"/about"} onClick={closeSideBar}>FAQ&apos;s</Link></li>
+                            <li><Link href={"/about"} onClick={closeSideBar}>Blogs</Link></li>
                         </ul>
                     </div>
                 </div>

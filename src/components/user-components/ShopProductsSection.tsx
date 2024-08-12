@@ -1,5 +1,5 @@
 'use client'
-import React, { Suspense, useEffect, useState } from 'react'
+import React, { Suspense, useEffect, useRef, useState } from 'react'
 import ProductCard from '../ProductCard'
 import ShopFilter from './ShopFilter'
 // import { products } from '@/lib/dummy'
@@ -7,6 +7,7 @@ import { fetchProductsShop } from '@/actions/products'
 import { IProducts, IProducts2 } from '@/lib/types'
 import ShopLoading from './ShopLoading'
 import { useSearchParams } from 'next/navigation'
+import { FaAngleDown, FaAngleUp } from 'react-icons/fa6'
 
 interface ShowProductSectionProps {
     initialProducts: {
@@ -42,6 +43,8 @@ const ShopProductsSection = ({ categoryName }: { categoryName: string }) => {
     const [previousStock, setPreviousStock] = useState<string | undefined>(undefined)
     const searchParams = useSearchParams();
 
+    const [filterCollapse, setFilterCollapse] = useState(false)
+
     useEffect(() => {
         const fetchProducts = async () => {
 
@@ -59,12 +62,12 @@ const ShopProductsSection = ({ categoryName }: { categoryName: string }) => {
             setPreviousQuery(query)
             setPreviousPrice(price)
             let boolStock = ((stock.split(',').length !== 1) || (stock === "")) ? undefined : stock === "in-stock" ? true : false
-            const data = await fetchProductsShop(offset, NUMBER_OF_LOAD_MORE_PRODUCTS, query, categoryName, price, undefined, boolStock);
-            if (data) {
-                setProductsState([...data.products])
-                setTotal(data.productCount)
-                setIsLoading(false);
-            }
+            // const data = await fetchProductsShop(offset, NUMBER_OF_LOAD_MORE_PRODUCTS, query, categoryName, price, undefined, boolStock);
+            // if (data) {
+            //     setProductsState([...data.products])
+            //     setTotal(data.productCount)
+            //     setIsLoading(false);
+            // }
             setIsLoading(false)
         }
         fetchProducts();
@@ -80,35 +83,51 @@ const ShopProductsSection = ({ categoryName }: { categoryName: string }) => {
 
     return (
         <div
-
             className='
                         grid 
-                        grid-cols-9
+                        sm:grid-cols-9
                         mt-20
+                        grid-cols-1
+                        gap-y-2
                     '
         >
 
-            <div className="col-span-2  border-r border-neutral px-2"
+            <div className=" sm:col-span-2 col-span-1   sm:border-r sm:border-neutral px-2"
             >
                 <h3
-                    className='text-2xl font-semibold py-5'
+                    className='max-sm:hidden text-2xl font-semibold py-5'
                 >Filters</h3>
                 <div>
-                    <Suspense>
-                        <ShopFilter />
-                    </Suspense>
+                    <div className="sm:hidden collapse bg-base-200 transition-all">
+                        <input type="checkbox" onClick={() => setFilterCollapse(prev => !prev)} />
+                        <div className="collapse-title text-xl font-semibold text-center flex justify-center items-center gap-3">Filters
+                            {
+                                filterCollapse ? <span><FaAngleUp /></span> : <span><FaAngleDown /></span>
+                            }
+                        </div>
+                        <div className="collapse-content">
+                            <Suspense>
+                                <ShopFilter />
+                            </Suspense>
+                        </div>
+                    </div>
+                    <div className='max-sm:hidden'>
+                        <Suspense>
+                            <ShopFilter />
+                        </Suspense>
+                    </div>
                 </div>
             </div>
             <div className="col-span-7 px-2">
                 <div className='flex justify-between items-center'>
                     <h3
-                        className='text-2xl font-semibold py-5 capitalize'
+                        className='text-xl sm:text-2xl font-semibold py-5 capitalize'
                     >{
                             categoryName === "all" ? "All Products" : categoryName
                         }</h3>
-                    <div className='flex justify-center items-center gap-4 '>
-                        <p className='font-semibold'>Sort by: </p>
-                        <select className="select select-bordered  ">
+                    <div className='flex max-sm:flex-col sm:justify-center sm:items-center sm:gap-4 '>
+                        <p className='font-semibold max-sm:text-xs self-end'>Sort by:</p>
+                        <select className="select select-bordered  select-sm">
                             <option>Popularity</option>
                             <option>Price: High to Low</option>
                             <option>Price: Low to High</option>
