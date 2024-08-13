@@ -16,6 +16,7 @@ export interface IProducts {
 
 export interface Product2 {
     id: string;
+    slug: string;
     name: string;
     description: string;
     brand: string,

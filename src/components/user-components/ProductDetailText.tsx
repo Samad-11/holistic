@@ -1,15 +1,27 @@
-import React, { Dispatch, SetStateAction } from 'react'
+'use client'
+import React, { Dispatch, SetStateAction, SyntheticEvent, useState } from 'react'
 import BackButton from './BackButton'
 import { Product2 } from '@/lib/types'
+import AddToCartButton from '../AddToCartButton'
+import QuantityButtons from '../QuantityButtons'
 
 const ProductDetailText = ({ product, selectedVariant, setSelectedVariant }: {
     product: Product2,
     setSelectedVariant: Dispatch<SetStateAction<number>>,
     selectedVariant: number
 }) => {
+    const [quantity, setQuantity] = useState(1)
 
     const handleVariant = (indx: number) => {
         setSelectedVariant(indx)
+    }
+
+    const handleQuantity = (addOrRemove: boolean) => {
+        if (addOrRemove) {
+            setQuantity(quantity + 1)
+        } else if (!addOrRemove && quantity > 1) {
+            setQuantity(quantity - 1)
+        }
     }
 
 
@@ -49,18 +61,17 @@ const ProductDetailText = ({ product, selectedVariant, setSelectedVariant }: {
                 </label>
             </div>
             <div className='max-w-sm'>
-                <div className="join w-full border rounded-sm  flex  items-center ">
-                    <button className=" join-item inline-flex justify-center items-center p-2 flex-1 btn btn-ghost">-</button>
-                    <span className='flex-1 text-center font-semibold'>1</span>
-                    <button className=" join-item inline-flex justify-center items-center p-2 flex-1 btn btn-ghost">+</button>
-                </div>
+                <QuantityButtons actionHandle={handleQuantity} quantity={quantity} />
             </div>
             <div>
                 <h2 className='font-semibold text-xl'>{product.variant[selectedVariant].price} INR</h2>
             </div>
             <div className='flex gap-5'>
-                <button className="btn btn-secondary text-white w-1/3">Add to Cart</button>
-                <button className="btn btn-secondary btn-outline group w-1/3"><span className='group-hover:text-white'>Buy Now</span></button>
+                <div className='w-1/3'>
+                    <AddToCartButton inStock={product.variant[selectedVariant].inStock} product={product} variant={product.variant[selectedVariant]} quantity={quantity} />
+                </div>
+                <button className="btn btn-secondary btn-outline group w-1/3">
+                    <span className='group-hover:text-white'>Buy Now</span></button>
             </div>
         </div>
     )

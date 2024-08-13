@@ -62,12 +62,12 @@ const ShopProductsSection = ({ categoryName }: { categoryName: string }) => {
             setPreviousQuery(query)
             setPreviousPrice(price)
             let boolStock = ((stock.split(',').length !== 1) || (stock === "")) ? undefined : stock === "in-stock" ? true : false
-            // const data = await fetchProductsShop(offset, NUMBER_OF_LOAD_MORE_PRODUCTS, query, categoryName, price, undefined, boolStock);
-            // if (data) {
-            //     setProductsState([...data.products])
-            //     setTotal(data.productCount)
-            //     setIsLoading(false);
-            // }
+            const data = await fetchProductsShop(offset, NUMBER_OF_LOAD_MORE_PRODUCTS, query, categoryName, price, undefined, boolStock);
+            if (data) {
+                setProductsState([...data.products])
+                setTotal(data.productCount)
+                setIsLoading(false);
+            }
             setIsLoading(false)
         }
         fetchProducts();

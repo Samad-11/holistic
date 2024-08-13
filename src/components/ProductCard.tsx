@@ -7,6 +7,7 @@ import { Category, Product, Variant } from '@prisma/client'
 import { IProduct, Product2 } from '@/lib/types'
 import { useRouter } from 'next/navigation'
 import slugify from 'slugify'
+import AddToCartButton from './AddToCartButton'
 
 // interface ProductCardProps {
 //     product: {
@@ -87,12 +88,13 @@ const ProductCard = ({ product }: { product: Product2 }) => {
                                 e.stopPropagation();
                                 handleSelectVariant(parseInt(e.target.value))
                             }}
-                            className="select select-bordered  text-white bg-secondary">
+                            className="select select-bordered  text-white bg-secondary capitalize">
 
                             {
                                 product.variant.map((v, indx) => (
 
                                     <option
+                                        className='capitalize'
                                         key={indx} value={indx}>{v.name}</option>
                                 ))
                             }
@@ -104,18 +106,7 @@ const ProductCard = ({ product }: { product: Product2 }) => {
                     <span>INR</span>
                 </div>
                 <div>
-                    <button
-                        disabled={
-                            product.variant[selectedVariant].inStock === false
-                        }
-                        className='btn btn-block btn-primary text-white'>
-                        <FaBasketShopping />
-                        <span>
-                            {
-                                product.variant[selectedVariant].inStock === false ? "Out Of Stock" : "Add to cart"
-                            }
-                        </span>
-                    </button>
+                    <AddToCartButton product={product} quantity={1} variant={product.variant[selectedVariant]} inStock={product.variant[selectedVariant].inStock} />
                 </div>
             </div>
         </div>
