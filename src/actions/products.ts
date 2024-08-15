@@ -1,6 +1,7 @@
 "use server"
 
 import prisma from "@/lib/prisma"
+import { cache } from "react";
 
 
 
@@ -150,4 +151,65 @@ export async function getSingleProduct(slug: string) {
     } catch (error) {
 
     }
+}
+
+export const totalproducts = cache(async () => {
+    return await prisma.product.count({})
+})
+
+
+export const fetchProducts = async (offset?: number, take?: number, query?: string, inStock?: boolean, price?: { gte?: number, lte?: number }) => {
+    try {
+        const where: any = {}
+        if (query) {
+            where.OR = [
+                { name: { contains: query, mode: "insensitive" } },
+                { description: { contains: query, mode: "insensitive" } },
+            ]
+
+            if (inStock !== undefined) {
+                where.variant = { some: { inStock } }
+            }
+
+            if (price) {
+                where.variant = { some: { price: { gte: price.gte, lte: price.lte } } }
+            }
+
+        } else if (inStock !== undefined) {
+            where.variant = { some: { inStock } }
+        } else if (price) {
+            where.variant = { some: { price: { gte: price.gte, lte: price.lte } } }
+        }
+
+        const products = await prisma.product.findMany({
+            where,
+            skip: ((offset || 1) - 1) * (take || 10),
+            take: take || 10,
+            include: {
+                category: true,
+                variant: {
+                    where: {
+                        price,
+                        inStock
+                    }
+                },
+            },
+            orderBy: {
+                createdAt: "desc"
+            }
+        })
+        return products
+
+    } catch (error) {
+        console.log('====================================');
+        console.log("Error", error);
+        console.log('====================================');
+    }
+
+
+}
+
+
+export async function addProduct(formdata: FormData) {
+    console.log(formdata);
 }
