@@ -7,6 +7,7 @@ import React from 'react'
 import QuantityButtons from '../QuantityButtons'
 import { Product2, Variant2 } from '@/lib/types'
 import { AiOutlineDelete } from 'react-icons/ai'
+import Link from 'next/link'
 
 const NavbarCart = () => {
 
@@ -56,7 +57,7 @@ const NavbarCart = () => {
                             </ul>
                             <span className="text-base-100">Subtotal: {totalPrice} INR</span>
                             <div className="">
-                                <button className="btn btn-primary btn-block text-white">View cart</button>
+                                <Link href={"/cart"} className="btn btn-primary btn-block text-white">View cart</Link>
                             </div>
                         </div>
                 }
@@ -79,8 +80,8 @@ const NavCartItem = ({ indx, cartItem }: { indx: number, cartItem: CartItem }) =
         <li className='h-full'>
             <div className='grid grid-cols-5 text-xs w-full h-10'>
                 <div className="col-span-3 flex flex-col">
-                    <span>{truncateStr(cartItem.product.name, 20)}</span>
-                    <span>{truncateStr(cartItem.variant.name, 17)}x{cartItem.quantity}</span>
+                    <span>{truncateStr(cartItem.product.name, 15)}</span>
+                    <span>{truncateStr(cartItem.variant.name, 15)}x{cartItem.quantity}</span>
                 </div>
                 <div className='col-span-2 flex flex-col justify-center items-center'>
                     <QuantityButtons actionHandle={handleQuantity} quantity={cartItem.quantity} classNameButton="btn-sm" classNameDiv="border-none" />
