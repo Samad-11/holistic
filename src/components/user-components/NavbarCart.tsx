@@ -72,14 +72,16 @@ const NavCartItem = ({ indx, cartItem }: { indx: number, cartItem: CartItem }) =
     const handleQuantity = (addOrRemove: boolean) => {
         if (addOrRemove) {
             increaseQuantity(cartItem.product.id, cartItem.variant.id, 1)
-        } else {
+        } else if (!addOrRemove && cartItem.quantity > 1) {
             decreaseQuantity(cartItem.product.id, cartItem.variant.id, 1)
+        } else {
+            removeFromCart(cartItem.product.id, cartItem.variant.id)
         }
     }
     return (
         <li className='h-full'>
             <div className='grid grid-cols-5 text-xs w-full h-10'>
-                <div className="col-span-3 flex flex-col">
+                <div className="col-span-3 flex flex-col capitalize">
                     <span>{truncateStr(cartItem.product.name, 15)}</span>
                     <span>{truncateStr(cartItem.variant.name, 15)}x{cartItem.quantity}</span>
                 </div>
@@ -87,11 +89,7 @@ const NavCartItem = ({ indx, cartItem }: { indx: number, cartItem: CartItem }) =
                     <QuantityButtons actionHandle={handleQuantity} quantity={cartItem.quantity} classNameButton="btn-sm" classNameDiv="border-none" />
                 </div>
             </div>
-            <div>
-                <button
-                    onClick={() => removeFromCart(cartItem.product.id, cartItem.variant.id)}
-                    className='btn btn-sm btn-error  btn-outline '><AiOutlineDelete size={14} className='text-white font-extrabold' /></button>
-            </div>
+
             <div className="divider"></div>
         </li>
     )

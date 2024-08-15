@@ -6,18 +6,24 @@ import QuantityButtons from '../QuantityButtons'
 import useCartStore, { CartItem as CartItemType } from '@/store/cartStore'
 import { AiOutlineDelete } from 'react-icons/ai'
 import Link from 'next/link'
+import { currencyFormat } from '@/lib/helper'
 
 const CartProductList = () => {
-    const { cart, increaseQuantity, decreaseQuantity, removeFromCart } = useCartStore()
+    const { cart, totalPrice } = useCartStore()
 
     return (
-        <div className='col-span-7 min-h-32 border border-gray'>
+        <div className='sm:col-span-7 col-span-1 min-h-32 border border-gray'>
             {
                 cart.map((cartItem, index) => (
                     <CartItem key={index} cartItem={cartItem} />
                 ))
             }
-            <div className='flex border-t border-t-base-200  p-5 justify-end sticky bottom-0 bg-white'>
+            <div className='flex border-t border-t-base-200  p-5 justify-between
+            items-center 
+            sticky bottom-0 bg-white'>
+                <p className='text-lg font-bold'>
+                    Total {currencyFormat(totalPrice)}
+                </p>
                 <button className='btn btn-primary  text-white 
                 '>
                     Place Order
@@ -47,13 +53,13 @@ const CartItem = ({ cartItem }: { cartItem: CartItemType }) => {
             </figure>
             <div className='flex gap-2 flex-1 '>
                 <div className='flex-1'>
-                    <p className='text-lg leading-4'>{cartItem.product.name}</p>
+                    <p className=' sm:text-lg leading-4'>{cartItem.product.name}</p>
                     <p className='text-secondary'>{cartItem.variant.name}</p>
                     <p className='text-secondary'>{cartItem.product.brand}</p>
-                    <p className='font-semibold text-lg'>{cartItem.variant.price * cartItem.quantity}</p>
-                </div>
-                <div className='justify-self-end self-end flex flex-col gap-2 w-32 border border-black'>
-                    <QuantityButtons quantity={cartItem.quantity} actionHandle={handleQuantity} classNameButton="btn-md" />
+                    <div className=' flex  justify-between items-center gap-2'>
+                        <p className='font-semibold sm:text-lg'>{currencyFormat(cartItem.variant.price * cartItem.quantity)}</p>
+                        <QuantityButtons quantity={cartItem.quantity} actionHandle={handleQuantity} classNameDiv="sm:w-32 w-24" />
+                    </div>
                 </div>
             </div>
         </div >

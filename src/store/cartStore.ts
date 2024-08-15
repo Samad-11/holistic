@@ -99,7 +99,8 @@ const useCartStore = create<CartState>()(
                 }),
             decreaseQuantity: (productId, variantId, number) =>
                 set((state) => {
-                    const updatedCart = state.cart.map((item) =>
+                    let updatedCart = state.cart.map((item) =>
+
                         item.product.id === productId && item.variant.id === variantId && item.quantity > 1
                             ? { ...item, quantity: item.quantity - number }
                             : item

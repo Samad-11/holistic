@@ -7,3 +7,7 @@ export function truncateStr(str: string, maxSize: number = 100): string {
         return `${str.slice(0, maxSize - 3)}...`;
     }
 }
+
+export function currencyFormat(price: number) {
+    return new Intl.NumberFormat("en-IN", { style: "currency", currency: "INR", maximumSignificantDigits: 2, }).format(price)
+}
