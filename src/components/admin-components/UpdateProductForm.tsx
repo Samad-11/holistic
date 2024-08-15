@@ -1,6 +1,8 @@
 'use client'
+import { imagePrefix } from '@/constants'
 // import { updateProduct } from '@/actions/products'
 import { Category2, Product2, Variant2 } from '@/lib/types'
+import Image from 'next/image'
 import React, { useRef, useState, useEffect } from 'react'
 
 const UpdateProductForm = ({ product, categories }: { product: Product2, categories: Category2[] }) => {
@@ -10,14 +12,22 @@ const UpdateProductForm = ({ product, categories }: { product: Product2, categor
 
     useEffect(() => {
         if (formRef.current) {
-            // Populate form with existing product data
-            // formRef.current['name'].value = product.name
-            // formRef.current['brand'].value = product.brand
-            // formRef.current['type'].value = product.type
-            // formRef.current['description'].value = product.description
-            // formRef.current['category'].value = product.category.id
+            const form = formRef.current;
+
+            // Set basic product fields
+            form.querySelector<HTMLInputElement>('input[name="name"]')!.value = product.name;
+            form.querySelector<HTMLInputElement>('input[name="brand"]')!.value = product.brand;
+            form.querySelector<HTMLInputElement>('input[name="type"]')!.value = product.type;
+            form.querySelector<HTMLTextAreaElement>('textarea[name="description"]')!.value = product.description;
+            form.querySelector<HTMLSelectElement>('select[name="category"]')!.value = product.category.id;
+
+            // Set variants data
+            product.variant.forEach((variant, i) => {
+                form.querySelector<HTMLInputElement>(`input[name="variant-${i + 1}-name"]`)!.value = variant.name;
+                form.querySelector<HTMLInputElement>(`input[name="variant-${i + 1}-price"]`)!.value = variant.price.toString();
+            });
         }
-    }, [product])
+    }, [product]);
 
     return (
         <>
@@ -133,13 +143,28 @@ const VariantFields = ({ sno, variant }: { sno: number, variant?: Variant2 }) =>
                     </div>
                     <input required type="text" placeholder="Variant Price" name={`variant-${sno}-price`} className="input input-bordered w-full " />
                 </label>
-                {
+                {/* {
                     Array.from({ length: noOfImages }).map((_, i) => (
                         <label key={"update-product-image-" + i} className="form-control w-full max-w-xs">
                             <div className="label">
                                 <span className="label-text">Pick an Image</span>
                             </div>
                             <input required type="file" accept='image/*' name={`variant-${sno}-image-${i + 1}`} className="file-input file-input-bordered w-full max-w-xs" />
+                        </label>
+                    ))
+                } */}
+
+                {
+                    variant?.images.map((image, indx) => (
+                        <label key={`image-to-remove-${indx}`} htmlFor='image-checkbox' className='size-20 relative border '>
+                            <Image
+                                src={`${imagePrefix}${image}`}
+                                alt='Product variant image'
+                                fill
+                                className='object-contain ' />
+                            <input
+                                className='absolute checkbox bottom-0'
+                                type='checkbox' value={image} name={`variant-${sno}-image-${indx + 1}-checkbox`} />
                         </label>
                     ))
                 }
