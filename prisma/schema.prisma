@@ -22,7 +22,7 @@ model Product {
   categoryId  String    @db.ObjectId
   category    Category  @relation(fields: [categoryId], references: [id])
   type        String
-  salesCount  Int
+  salesCount  Int       @default(0)
   variant     Variant[]
   reviews     Review[]
   createdAt   DateTime  @default(now())

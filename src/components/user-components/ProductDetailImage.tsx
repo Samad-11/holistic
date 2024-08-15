@@ -1,4 +1,5 @@
 'use client'
+import { imagePrefix } from '@/constants'
 import { Product2 } from '@/lib/types'
 import { cn } from '@/lib/utils'
 import Image from 'next/image'
@@ -20,7 +21,7 @@ const ProductDetailImage = ({ product, selectedVariant }: { product: Product2, s
         >
             <figure className='aspect-square relative rounded-md'>
                 <Image
-                    src={product.variant[selectedVariant].images[selectedImage]}
+                    src={`${imagePrefix}${product.variant[selectedVariant].images[selectedImage]}`}
                     alt="Product Image "
                     fill
                     className='object-contain shadow-md shadow-black rounded-md' />
@@ -34,7 +35,7 @@ const ProductDetailImage = ({ product, selectedVariant }: { product: Product2, s
                                 selectedImage === index ? 'border-black' : 'border-primary'
                             )}>
                             <Image
-                                src={image}
+                                src={`${imagePrefix}${image}`}
                                 alt='Product Images'
                                 fill
                                 className='object-cover'

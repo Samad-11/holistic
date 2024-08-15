@@ -1,7 +1,27 @@
 "use server"
 
 import prisma from "@/lib/prisma"
+import { PutObjectCommand, S3Client } from "@aws-sdk/client-s3";
+import { randomUUID } from "crypto";
 import { cache } from "react";
+import slugify from "slugify";
+
+
+const {
+    AWS_ACCESS_KEY,
+    AWS_SECRET_ACCESS_KEY,
+    AWS_BUCKET_NAME,
+    AWS_BUCKET_REGION,
+} = process.env
+
+const s3 = new S3Client({
+    credentials: {
+        accessKeyId: AWS_ACCESS_KEY!,
+        secretAccessKey: AWS_SECRET_ACCESS_KEY!
+    },
+    region: AWS_BUCKET_REGION
+})
+
 
 
 
@@ -149,6 +169,7 @@ export async function getSingleProduct(slug: string) {
 
         return product
     } catch (error) {
+        console.log('error', error);
 
     }
 }
@@ -211,5 +232,69 @@ export const fetchProducts = async (offset?: number, take?: number, query?: stri
 
 
 export async function addProduct(formdata: FormData) {
-    console.log(formdata);
+    try {
+        const name = formdata.get("name") as string
+        const slug = slugify(name, { lower: true, trim: true, replacement: "-" })
+        const description = formdata.get("description") as string
+        const categoryId = formdata.get("category") as string
+        const type = formdata.get("type") as string
+        const brand = formdata.get("brand") as string
+        const noOfVariants = formdata.get("noOfVariants") as unknown as number
+        let variantArray: { name: string, price: number, images: File[], key: string[] }[] = []
+        const newProduct = await prisma.product.create({
+            data: {
+                brand, description, name, slug, type, categoryId
+            }
+        })
+
+        const productId = newProduct.id
+        for (let i = 1; i <= noOfVariants; i++) {
+            const name = formdata.get(`variant-${i}-name`) as string
+            const price = parseFloat(formdata.get(`variant-${i}-price`) as string)
+            const noOfImages = formdata.get(`variant-${i}-noOfImages`) as unknown as number
+            console.log(noOfImages);
+
+            let images: File[] = []
+            let key: string[] = []
+            for (let j = 1; j <= noOfImages; j++) {
+                const image = formdata.get(`variant-${i}-image-${j}`) as File
+                images.push(image)
+                key.push(randomUUID() + image.name)
+            }
+            variantArray.push({
+                name, price, images, key
+            })
+        }
+        console.log("variantArray", variantArray);
+
+        variantArray.forEach(async (variant) => {
+            variant.images.forEach(async (image, j) => {
+                const arrayBuffer = await image.arrayBuffer();
+                const buffer = new Uint8Array(arrayBuffer);
+
+                const cmd = new PutObjectCommand({
+                    Bucket: AWS_BUCKET_NAME,
+                    Key: variant.key[j],
+                    Body: buffer,
+                    ContentType: image.type
+                })
+
+                const res = await s3.send(cmd);
+                console.log(res);
+
+            })
+        })
+        const data = variantArray.map((variant, indx) => {
+            return { productId, name: variant.name, price: variant.price, images: variant.key }
+        })
+        const newVariants = await prisma.variant.createMany({
+            data
+        })
+
+        console.log("created successful");
+
+    } catch (error) {
+        console.log('error', error);
+
+    }
 }

@@ -8,6 +8,7 @@ import { IProduct, Product2 } from '@/lib/types'
 import { useRouter } from 'next/navigation'
 import slugify from 'slugify'
 import AddToCartButton from './AddToCartButton'
+import { imagePrefix } from '@/constants'
 
 // interface ProductCardProps {
 //     product: {
@@ -66,7 +67,7 @@ const ProductCard = ({ product }: { product: Product2 }) => {
                 <Image
                     fill
                     className='object-contain'
-                    src={product.variant[selectedVariant].images[0]}
+                    src={`${imagePrefix}${product.variant[selectedVariant].images[0]}`}
                     alt={`${product.name}-image`} />
             </figure>
             <div className="card-body py-0 px-2 pb-2">
